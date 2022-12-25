@@ -7,5 +7,6 @@ const store = configureStore({
   },
 });
 
+export * from "./thunks/addUser.js";
 export * from "./thunks/usersFetching.js";
 export { store };
