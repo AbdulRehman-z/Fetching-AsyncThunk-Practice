@@ -5,10 +5,19 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Button, Divider, List, ListItem } from "@mui/material";
-import { TransitionGroup } from "react-transition-group";
 import { Delete } from "@mui/icons-material";
+import { useThunk } from "../hooks/useThunk.hook";
+import { deleteUser } from "../store/store";
+import Alert from "./Alert";
 
 const RenderedUsers = ({ usersList }) => {
+  const [doDeleteUser, isDeletingUser, deletingUserError] =
+    useThunk(deleteUser);
+
+  const handleDeleteUser = (user) => {
+    doDeleteUser(user);
+  };
+
   return (
     <List sx={{ marginTop: "2rem" }}>
       {usersList.map((user) => {
@@ -48,18 +57,23 @@ const RenderedUsers = ({ usersList }) => {
                 </Typography>
               </AccordionDetails>
             </Accordion>
-            <Button
-              sx={{
-                padding: "0.2rem 1rem",
-                marginLeft: "1.5rem",
-              }}
-              size="small"
-              color="error"
-              variant="outlined"
-              startIcon={<Delete />}
-            >
-              Delete
-            </Button>
+            {isDeletingUser ? (
+              <Alert severity="error" message="Deleling..." />
+            ) : (
+              <Button
+                sx={{
+                  padding: "0.2rem 1rem",
+                  marginLeft: "1.5rem",
+                }}
+                onClick={() => handleDeleteUser(user)}
+                size="small"
+                color="error"
+                variant="outlined"
+                startIcon={<Delete />}
+              >
+                Delete
+              </Button>
+            )}
           </ListItem>
         );
       })}
@@ -67,7 +81,7 @@ const RenderedUsers = ({ usersList }) => {
   );
 };
 
-export default RenderedUsers;
+export default React.memo(RenderedUsers);
 
 // <ListItem key={user.id}>
 //               <Accordion

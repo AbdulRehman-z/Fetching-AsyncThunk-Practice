@@ -1,46 +1,5 @@
 {
-  "users": [
-    {
-      "id": 1,
-      "name": "Abdul"
-    },
-    {
-      "name": "Carley",
-      "id": 2
-    },
-    {
-      "name": "Daryl",
-      "id": 3
-    },
-    {
-      "name": "Vergie",
-      "id": 4
-    },
-    {
-      "name": "Declan",
-      "id": 5
-    },
-    {
-      "name": "Anne",
-      "id": 6
-    },
-    {
-      "name": "Ceasar",
-      "id": 7
-    },
-    {
-      "name": "Buck",
-      "id": 8
-    },
-    {
-      "name": "Annette",
-      "id": 9
-    },
-    {
-      "name": "Leatha",
-      "id": 10
-    }
-  ],
+  "users": [],
   "albums": [],
   "photos": []
 }

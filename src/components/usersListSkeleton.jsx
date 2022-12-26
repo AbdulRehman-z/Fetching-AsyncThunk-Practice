@@ -4,7 +4,16 @@ import React from "react";
 
 const UsersListSkeleton = ({ skeletonCount, variant, width, height }) => {
   return (
-    <Stack spacing={2} m={5}>
+    <Stack
+      spacing={2}
+      sx={{
+        mt: 6,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       {Array(skeletonCount)
         .fill(0)
         .map((_, i) => {
