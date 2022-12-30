@@ -9,8 +9,10 @@ import { Delete } from "@mui/icons-material";
 import { useThunk } from "../hooks/useThunk.hook";
 import { deleteUser } from "../store/store";
 import Alert from "./Alert";
+import Albums from "./albums";
 
 const RenderedUsers = ({ usersList }) => {
+  const [open, setOpen] = useState(false);
   const [doDeleteUser, isDeletingUser, deletingUserError] =
     useThunk(deleteUser);
 
@@ -24,6 +26,7 @@ const RenderedUsers = ({ usersList }) => {
         return (
           <ListItem
             sx={{
+              width: "100%",
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
@@ -32,12 +35,14 @@ const RenderedUsers = ({ usersList }) => {
           >
             <Accordion
               sx={{
+                width: "85%",
                 backgroundColor: "white",
                 borderRadius: ".5rem",
                 boxShadow: "none",
               }}
             >
               <AccordionSummary
+                onClick={() => setOpen(!open)}
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1a-content"
                 id="panel1a-header"
@@ -46,15 +51,11 @@ const RenderedUsers = ({ usersList }) => {
               </AccordionSummary>
               <Divider
                 sx={{
-                  margin: "0.2rem 1rem",
+                  margin: "0.2rem 0.5rem",
                 }}
               />
               <AccordionDetails>
-                <Typography>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                  eget.
-                </Typography>
+                {open && <Albums user={user} />}
               </AccordionDetails>
             </Accordion>
             {isDeletingUser ? (
@@ -62,7 +63,7 @@ const RenderedUsers = ({ usersList }) => {
             ) : (
               <Button
                 sx={{
-                  padding: "0.2rem 1rem",
+                  padding: "0.2rem 0.4rem",
                   marginLeft: "1.5rem",
                 }}
                 onClick={() => handleDeleteUser(user)}
