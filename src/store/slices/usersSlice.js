@@ -1,55 +1,52 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { fetchUsers } from "../thunks/usersFetching";
-import { addUser } from "../thunks/addUser";
-import { deleteUser } from "../thunks/deleteUser";
+import { createSlice } from '@reduxjs/toolkit';
+import { fetchUsers } from '../thunks/fetchUsers';
+import { addUser } from '../thunks/addUser';
+import { removeUser } from '../thunks/removeUser';
 
 const usersSlice = createSlice({
-  name: "users",
+  name: 'users',
   initialState: {
     isLoading: false,
-    usersList: [],
+    data: [],
     error: null,
   },
   extraReducers(builder) {
-    //Fetch users from the server
     builder.addCase(fetchUsers.pending, (state, action) => {
       state.isLoading = true;
     });
     builder.addCase(fetchUsers.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.usersList = action.payload;
+      state.data = action.payload;
     });
     builder.addCase(fetchUsers.rejected, (state, action) => {
       state.isLoading = false;
-      state.error = action.error.message;
+      state.error = action.error;
     });
 
-    //Add user to the list
     builder.addCase(addUser.pending, (state, action) => {
       state.isLoading = true;
     });
     builder.addCase(addUser.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.usersList.push(action.payload);
+      state.data.push(action.payload);
     });
     builder.addCase(addUser.rejected, (state, action) => {
       state.isLoading = false;
-      state.error = action.error.message;
+      state.error = action.error;
     });
 
-    //Delete user from the list
-    builder.addCase(deleteUser.pending, (state, action) => {
+    builder.addCase(removeUser.pending, (state, action) => {
       state.isLoading = true;
     });
-    builder.addCase(deleteUser.fulfilled, (state, action) => {
+    builder.addCase(removeUser.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.usersList = state.usersList.filter(
-        (user) => user.id !== action.payload.id
-      );
+      state.data = state.data.filter((user) => {
+        return user.id !== action.payload.id;
+      });
     });
-    builder.addCase(deleteUser.rejected, (state, action) => {
+    builder.addCase(removeUser.rejected, (state, action) => {
       state.isLoading = false;
-      state.error = action.error.message;
+      state.error = action.error;
     });
   },
 });
