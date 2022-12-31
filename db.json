@@ -9,6 +9,28 @@
       "id": 6
     }
   ],
-  "albums": [],
-  "photos": []
+  "albums": [
+    {
+      "userId": 5,
+      "title": "Bespoke Soft Gloves",
+      "id": 1
+    },
+    {
+      "userId": 5,
+      "title": "Handmade Rubber Fish",
+      "id": 2
+    }
+  ],
+  "photos": [
+    {
+      "albumId": 1,
+      "url": "https://loremflickr.com/150/150/abstract?lock=86050",
+      "id": 1
+    },
+    {
+      "albumId": 1,
+      "url": "https://loremflickr.com/150/150/abstract?lock=48435",
+      "id": 2
+    }
+  ]
 }

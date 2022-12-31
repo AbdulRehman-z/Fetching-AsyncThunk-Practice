@@ -54,7 +54,6 @@ const albumsApi = createApi({
           return [{ type: "Album", id: album.id }];
         },
         query: (album) => {
-          console.log(album.id, album.userId);
           return {
             url: `/albums/${album.id}`,
             method: "DELETE",
